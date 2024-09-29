@@ -1,5 +1,6 @@
 ﻿using BloodBank.Core.Entity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace BloodBank.Infrastructure.Persistence
 {
@@ -18,7 +19,7 @@ namespace BloodBank.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
