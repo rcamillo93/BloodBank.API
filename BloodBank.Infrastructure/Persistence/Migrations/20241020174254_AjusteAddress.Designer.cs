@@ -4,6 +4,7 @@ using BloodBank.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BloodBank.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(BloodBankDbContext))]
-    partial class BloodBankDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241020174254_AjusteAddress")]
+    partial class AjusteAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,7 +191,7 @@ namespace BloodBank.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("BloodBank.Core.Entity.Address", b =>
                 {
-                    b.HasOne("BloodBank.Core.Entity.City", null)
+                    b.HasOne("BloodBank.Core.Entity.City", "City")
                         .WithMany("Addresses")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -199,6 +202,8 @@ namespace BloodBank.Infrastructure.Persistence.Migrations
                         .HasForeignKey("BloodBank.Core.Entity.Address", "DonorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("BloodBank.Core.Entity.City", b =>

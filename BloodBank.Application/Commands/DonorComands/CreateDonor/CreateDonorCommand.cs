@@ -17,7 +17,7 @@ namespace BloodBank.Application.Commands.DonorComands.CreateDonor
             Weight = weight;
             BloodType = bloodType;
             RhFactor = rhFactor;
-            Address = address;
+            Address = address;           
         }
 
         public string FullName { get; private set; }

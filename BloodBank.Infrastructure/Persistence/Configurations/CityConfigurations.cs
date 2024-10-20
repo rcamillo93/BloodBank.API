@@ -16,6 +16,12 @@ namespace BloodBank.Infrastructure.Persistence.Configurations
                 .WithMany(s => s.Cities)
                 .HasForeignKey(c => c.StateId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasMany<Address>(c => c.Addresses)
+                .WithOne()
+                .HasForeignKey(a => a.CityId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

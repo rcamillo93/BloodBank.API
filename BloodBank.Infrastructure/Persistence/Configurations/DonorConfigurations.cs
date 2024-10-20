@@ -12,6 +12,13 @@ namespace BloodBank.Infrastructure.Persistence.Configurations
                 .HasKey(d => d.Id);
 
             builder
+                .HasOne(a => a.Address)
+                .WithOne()
+                .HasForeignKey<Address>(a => a.DonorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder
                 .Property(d => d.FullName)
                 .IsRequired()
                 .HasMaxLength(100);

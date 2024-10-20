@@ -20,21 +20,19 @@ namespace BloodBank.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder
+                .Property(a => a.Neighborhood)
+                .IsRequired();
+
+            builder
                 .Property(a => a.PublicPlace)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(100);       
 
-            builder
-                .HasOne(d => d.Donor)
-                .WithOne(d => d.Address)
-                .HasForeignKey<Address>(a => a.DonorId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-               .HasOne(a => a.City)
-               .WithMany(c => c.Addresses)
-               .HasForeignKey(a => a.CityId)
-               .OnDelete(DeleteBehavior.Restrict);
+            //builder
+            //   .HasOne(a => a.City)
+            //   .WithMany(c => c.Addresses)
+            //   .HasForeignKey(a => a.CityId)
+            //   .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

@@ -20,8 +20,10 @@ namespace BloodBank.Application.Commands.DonorComands.CreateDonor
                                 request.BloodType, request.RhFactor);            
 
             await _donorRepository.AddAsync(donor);
+            await _donorRepository.SaveChangesAsync();
 
-            var address = new Address(request.Address.PublicPlace, request.Address.CityId, request.Address.Cep, donor.Id);
+            var address = new Address(request.Address.PublicPlace, request.Address.CityId, request.Address.Cep,
+                                      request.Address.Neighborhood, donor.Id);
 
             await _donorRepository.AddAddressAsync(address);
 
