@@ -1,13 +1,14 @@
-﻿using BloodBank.Core.Enums;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using BloodBank.Core.Entity;
+using BloodBank.Core.Enums;
 
-namespace BloodBank.Core.Entity
+namespace BloodBank.Application.ViewModel
 {
-    public class Donor : BaseEntity
+    public class DonorViewModel
     {
-        public Donor(string fullName, string email, DateTime dateBirth, char gender, double weight, 
-                    BloodTypeEnum bloodType, RHFactorEnum rhFactor)
+        public DonorViewModel(int id, string fullName, string email, DateTime dateBirth, char gender, double weight, 
+                            BloodTypeEnum bloodType, RHFactorEnum rhFactor)
         {
+            Id = id;
             FullName = fullName;
             Email = email;
             DateBirth = dateBirth;
@@ -15,8 +16,10 @@ namespace BloodBank.Core.Entity
             Weight = weight;
             BloodType = bloodType;
             RhFactor = rhFactor;
+           // Address = address;          
         }
 
+        public int Id { get; private set; }
         public string FullName { get; private set; }
         public string Email { get; private set; }
         public DateTime DateBirth { get; private set; }
@@ -24,16 +27,7 @@ namespace BloodBank.Core.Entity
         public double Weight { get; private set; }
         public BloodTypeEnum BloodType { get; private set; }
         public RHFactorEnum RhFactor { get; private set; }
-        public Address Address { get; private set; }
+        //public Address Address { get; private set; }
         public List<Donation> Donations { get; private set; } = new List<Donation>();
-
-        public void Update(string name, string email, double weight, Address address)
-        {
-            FullName += name;
-            Email = email;
-            Weight = weight;
-            Address.Update(address.PublicPlace, address.CityId, address.Cep);
-        }
-
     }
 }

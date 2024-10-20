@@ -1,12 +1,14 @@
-﻿using BloodBank.Core.Enums;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using BloodBank.Application.Models;
+using BloodBank.Core.Entity;
+using BloodBank.Core.Enums;
+using MediatR;
 
-namespace BloodBank.Core.Entity
+namespace BloodBank.Application.Commands.DonorComands.CreateDonor
 {
-    public class Donor : BaseEntity
+    public class CreateDonorCommand : IRequest<ResultViewModel<int>>
     {
-        public Donor(string fullName, string email, DateTime dateBirth, char gender, double weight, 
-                    BloodTypeEnum bloodType, RHFactorEnum rhFactor)
+        public CreateDonorCommand(string fullName, string email, DateTime dateBirth, char gender, 
+                                double weight, BloodTypeEnum bloodType, RHFactorEnum rhFactor, Address address)
         {
             FullName = fullName;
             Email = email;
@@ -15,6 +17,7 @@ namespace BloodBank.Core.Entity
             Weight = weight;
             BloodType = bloodType;
             RhFactor = rhFactor;
+            Address = address;
         }
 
         public string FullName { get; private set; }
@@ -25,15 +28,5 @@ namespace BloodBank.Core.Entity
         public BloodTypeEnum BloodType { get; private set; }
         public RHFactorEnum RhFactor { get; private set; }
         public Address Address { get; private set; }
-        public List<Donation> Donations { get; private set; } = new List<Donation>();
-
-        public void Update(string name, string email, double weight, Address address)
-        {
-            FullName += name;
-            Email = email;
-            Weight = weight;
-            Address.Update(address.PublicPlace, address.CityId, address.Cep);
-        }
-
     }
 }
