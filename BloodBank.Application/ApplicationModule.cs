@@ -27,7 +27,8 @@ namespace BloodBank.Application
             services.AddDbContext<BloodBankDbContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("BloodBank")));
 
-            services.AddScoped<IDonorRepository, DonorRepository>();           
+            services.AddScoped<IDonorRepository, DonorRepository>();   
+            services.AddScoped<IDonationRepository, DonationRepository>();
 
             return services;
         }
