@@ -1,5 +1,6 @@
 ﻿using BloodBank.Application.Commands.DonationComands;
 using BloodBank.Application.Queries.DonationQueries.GetAllByPeriod;
+using BloodBank.Application.Queries.DonationQueries.GetByDonor;
 using BloodBank.Application.Queries.DonationQueries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -54,5 +55,19 @@ namespace BloodBank.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("bydonor/{idDonor}")]
+        public async Task<IActionResult> GetDonationByDonor(int idDonor)
+        {
+            var query = new GetDonationByDonorQuery(idDonor);
+
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
+        }
+
     }
 }

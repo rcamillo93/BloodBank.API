@@ -20,7 +20,7 @@ namespace BloodBank.Application.Commands.DonorComands.UpdateDonor
             if (donor == null)
                 return ResultViewModel.Error("Doador não encontrado");
 
-            donor.Update(request.FullName, request.Email, request.Weight, donor.Address);
+            donor.Update(request.FullName, request.Email, request.Weight, request.Address);
             await _donorRepository.SaveChangesAsync();
 
             return ResultViewModel.Sucess();

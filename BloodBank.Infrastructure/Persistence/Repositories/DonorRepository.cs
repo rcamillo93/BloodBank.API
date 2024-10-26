@@ -33,6 +33,7 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
         public async Task<Donor?> GetByIdAsync(int id)
         {
             return await _dbContext.Donors
+                    .Include(d => d.Address)
                     .AsNoTracking()
                     .SingleOrDefaultAsync(d => d.Id == id);
         }
