@@ -8,7 +8,7 @@ namespace BloodBank.Application.Commands.DonorComands.CreateDonor
     public class CreateDonorCommand : IRequest<ResultViewModel<int>>
     {
         public CreateDonorCommand(string fullName, string email, DateTime dateBirth, char gender, 
-                                double weight, BloodTypeEnum bloodType, RHFactorEnum rhFactor, Address address)
+                                double weight, BloodTypeEnum bloodType, RHFactorEnum rhFactor, AddressCommand address)
         {
             FullName = fullName;
             Email = email;
@@ -27,6 +27,6 @@ namespace BloodBank.Application.Commands.DonorComands.CreateDonor
         public double Weight { get; private set; }
         public BloodTypeEnum BloodType { get; private set; }
         public RHFactorEnum RhFactor { get; private set; }
-        public Address Address { get; private set; }
-    }
+        public AddressCommand Address { get; private set; }
+    }  
 }

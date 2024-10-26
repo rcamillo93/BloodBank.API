@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BloodBank.Infrastructure.Persistence.Configurations
 {
-    public class StockBloodConfigurations : IEntityTypeConfiguration<StockBlood>
+    public class StockBloodConfigurations : IEntityTypeConfiguration<BloodStock>
     {
-        public void Configure(EntityTypeBuilder<StockBlood> builder)
+        public void Configure(EntityTypeBuilder<BloodStock> builder)
         {
             builder
                 .HasKey(sb => sb.Id);

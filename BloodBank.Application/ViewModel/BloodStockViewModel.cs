@@ -1,10 +1,10 @@
 ﻿using BloodBank.Core.Enums;
 
-namespace BloodBank.Core.Entity
+namespace BloodBank.Application.ViewModel
 {
-    public class StockBlood : BaseEntity
+    public class BloodStockViewModel
     {
-        public StockBlood(BloodTypeEnum bloodType, RHFactorEnum rhFactor, int quantityMl)
+        public BloodStockViewModel(BloodTypeEnum bloodType, RHFactorEnum rhFactor, int quantityMl)
         {
             BloodType = bloodType;
             RhFactor = rhFactor;

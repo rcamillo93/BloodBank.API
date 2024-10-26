@@ -1,4 +1,5 @@
 ﻿using BloodBank.Application.Models;
+using BloodBank.Core.Entity;
 using BloodBank.Core.Repositories;
 using MediatR;
 
@@ -20,7 +21,10 @@ namespace BloodBank.Application.Commands.DonorComands.UpdateDonor
             if (donor == null)
                 return ResultViewModel.Error("Doador não encontrado");
 
-            donor.Update(request.FullName, request.Email, request.Weight, request.Address);
+            var address = new Address(request.Address.PublicPlace, request.Address.CityId,
+                        request.Address.Cep, request.Address.Neighborhood, request.Id);
+
+            donor.Update(request.FullName, request.Email, request.Weight, address);
             await _donorRepository.SaveChangesAsync();
 
             return ResultViewModel.Sucess();

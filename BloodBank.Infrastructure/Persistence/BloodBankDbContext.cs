@@ -14,7 +14,7 @@ namespace BloodBank.Infrastructure.Persistence
         public DbSet<Donor> Donors { get; set; }
         public DbSet<Donation> Donations { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<StockBlood> StockBloods { get; set; }
+        public DbSet<BloodStock> BloodStock { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
