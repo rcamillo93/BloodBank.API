@@ -7,6 +7,7 @@ namespace BloodBank.Core.Repositories
         Task<List<Donation>> GetAllByPeriod(DateTime initialDate, DateTime finishDate);
         Task<List<Donation>> GetAllDonationByDonor(int idDonor);
         Task<Donation?> GetById(int id);
+      //  Task<DateTime> GetDateLastDonation(int idDonor);
         Task AddAsync(Donation donation);        
         Task SaveChangesAsync();
     }

@@ -37,6 +37,7 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
                           .Include(d => d.Donor)
                           .Where(d => d.DonorId == idDonor)
                           .AsNoTracking()
+                          .OrderByDescending(d => d.DonationDate)
                           .ToListAsync();
         }
 

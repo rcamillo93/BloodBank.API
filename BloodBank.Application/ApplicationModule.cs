@@ -1,4 +1,5 @@
-﻿using BloodBank.Application.Commands.DonorComands.CreateDonor;
+﻿using BloodBank.Application.Commands.DonationComands;
+using BloodBank.Application.Commands.DonorComands.CreateDonor;
 using BloodBank.Application.Models;
 using BloodBank.Core.Repositories;
 using BloodBank.Infrastructure.Persistence;
@@ -29,6 +30,7 @@ namespace BloodBank.Application
 
             services.AddScoped<IDonorRepository, DonorRepository>();   
             services.AddScoped<IDonationRepository, DonationRepository>();
+            services.AddScoped<IBloodStockRepository, BloodStockRepository>();
 
             return services;
         }
@@ -37,6 +39,8 @@ namespace BloodBank.Application
         {
             services.AddMediatR(config =>
                 config.RegisterServicesFromAssemblyContaining<CreateDonorCommand>());
+
+            services.AddTransient<IPipelineBehavior<CreateDonationCommand, ResultViewModel<int>>, ValidateCreateDonationCommand>();
 
             return services;
         }
