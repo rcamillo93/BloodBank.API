@@ -21,7 +21,7 @@ namespace BloodBank.Application.Validators
 
             RuleFor(d => d.Weight)
                 .GreaterThanOrEqualTo(50)
-                    .WithMessage("É necessário ter no minímo 50kg para ser um doador");
+                    .WithMessage("É necessário ter no mínimo 50kg para ser um doador");
 
             RuleFor(d => d.BloodType)
                 .IsInEnum()
@@ -30,9 +30,6 @@ namespace BloodBank.Application.Validators
             RuleFor(d => d.RhFactor)
                    .IsInEnum()
                         .WithMessage("Valor inválido para prioridade");
-
-
-
         }
     }
 }

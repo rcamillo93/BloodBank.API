@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BloodBank.Application.Commands.DonationComands
 {
-    public class ValidateCreateDonationCommand : IPipelineBehavior<CreateDonationCommand, ResultViewModel<int>>
+    public class ValidateCreateDonationCommandBehavior : IPipelineBehavior<CreateDonationCommand, ResultViewModel<int>>
     {       
         private readonly IDonorRepository _donorRepository;
         private readonly IDonationRepository _donationRepositor;
 
-        public ValidateCreateDonationCommand(IDonorRepository donorRepository, IDonationRepository donationRepositor)
+        public ValidateCreateDonationCommandBehavior(IDonorRepository donorRepository, IDonationRepository donationRepositor)
         {
             _donorRepository = donorRepository;
             _donationRepositor = donationRepositor;
@@ -34,7 +34,7 @@ namespace BloodBank.Application.Commands.DonationComands
                 var lastDonation = DateTime.Now.AddDays(days) < donor.FirstOrDefault().DonationDate;
 
                 if(!lastDonation)
-                   return ResultViewModel<int>.Error($"É necessário ter um intervalo de no minímo {days} " +
+                   return ResultViewModel<int>.Error($"É necessário ter um intervalo de no mínimo {days} " +
                          $"entre as doações. \nData da última doação: {donor.FirstOrDefault().DonationDate?.ToShortDateString()}.");
 
             }
