@@ -36,8 +36,7 @@ namespace BloodBank.Application.Commands.DonationComands
             }
             else
             {
-                stock.UpdateBloodStock(request.QuantityMl);
-               
+                stock.InputBloodStock(request.QuantityMl);               
             }
 
             await _stockRepository.SaveChangesAsync();

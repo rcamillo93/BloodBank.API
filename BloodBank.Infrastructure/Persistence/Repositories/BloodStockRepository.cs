@@ -24,11 +24,12 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
             return await _dbContext.BloodStock.ToListAsync();
         }
 
-        public async Task<BloodStock> GetAllByType(BloodTypeEnum bloodType)
+        public async Task<List<BloodStock>> GetAllByType(BloodTypeEnum bloodType)
         {
             return await _dbContext.BloodStock
                                 .AsNoTracking()
-                                .SingleOrDefaultAsync(sb => sb.BloodType == bloodType);             
+                                .Where(sb => sb.BloodType == bloodType)
+                                .ToListAsync();      
         }
 
         public async Task<BloodStock?> GetStockBloodBy(BloodTypeEnum bloodType, RHFactorEnum rHFactor)

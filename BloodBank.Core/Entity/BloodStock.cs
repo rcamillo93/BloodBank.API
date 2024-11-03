@@ -15,9 +15,14 @@ namespace BloodBank.Core.Entity
         public RHFactorEnum RhFactor { get; private set; }
         public int QuantityMl { get; private set; }
 
-        public void UpdateBloodStock(int quantity)
+        public void InputBloodStock(int quantity)
         {
             QuantityMl += quantity;
+        }
+
+        public void OutputBloodStock(int quantity)
+        {
+            QuantityMl -= quantity;
         }
     }
 }

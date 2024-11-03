@@ -1,5 +1,6 @@
 ﻿using BloodBank.Application.Commands.DonorComands.CreateDonor;
 using BloodBank.Application.Commands.DonorComands.UpdateDonor;
+using BloodBank.Application.Queries.AddressQueries;
 using BloodBank.Application.Queries.DonorQueries.GetAllDonors;
 using BloodBank.Application.Queries.DonorQueries.GetDonorById;
 using MediatR;
@@ -68,6 +69,19 @@ namespace BloodBank.API.Controllers
                 return BadRequest(result.Message);
 
             return NoContent();
+        }
+
+        [HttpGet("cep")]
+        public async Task<IActionResult> GetAddressByCep(string cep)
+        {
+            var query = new GetAddressByCepQuery(cep);
+            
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+                return BadRequest(result.Message);
+
+            return Ok(result);
         }
     }
 }

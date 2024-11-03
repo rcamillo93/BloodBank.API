@@ -2,6 +2,8 @@
 using BloodBank.Application.Commands.DonorComands.CreateDonor;
 using BloodBank.Application.Models;
 using BloodBank.Core.Repositories;
+using BloodBank.Core.Services;
+using BloodBank.Infrastructure.ExternalApi;
 using BloodBank.Infrastructure.Persistence;
 using BloodBank.Infrastructure.Persistence.Repositories;
 using MediatR;
@@ -18,7 +20,8 @@ namespace BloodBank.Application
         {
             services
                 .AddHandlers() 
-                .AddRepositories(configuration);                              
+                .AddRepositories(configuration)
+                .AddServices(configuration);                              
 
             return services;
         }
@@ -41,6 +44,13 @@ namespace BloodBank.Application
                 config.RegisterServicesFromAssemblyContaining<CreateDonorCommand>());
 
             services.AddTransient<IPipelineBehavior<CreateDonationCommand, ResultViewModel<int>>, ValidateCreateDonationCommand>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHttpClient<ICepService, CepService>();
 
             return services;
         }

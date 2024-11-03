@@ -7,7 +7,7 @@ namespace BloodBank.Core.Repositories
     {
         Task AddAsync(BloodStock stockBlood);        
         Task<List<BloodStock>> GetAllAsync();
-        Task<BloodStock> GetAllByType(BloodTypeEnum bloodType);
+        Task<List<BloodStock>> GetAllByType(BloodTypeEnum bloodType);
         Task<BloodStock?> GetStockBloodBy(BloodTypeEnum bloodType, RHFactorEnum rHFactor);
         Task SaveChangesAsync();
     }
