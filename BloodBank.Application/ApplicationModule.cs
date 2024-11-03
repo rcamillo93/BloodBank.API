@@ -34,6 +34,7 @@ namespace BloodBank.Application
             services.AddScoped<IDonorRepository, DonorRepository>();   
             services.AddScoped<IDonationRepository, DonationRepository>();
             services.AddScoped<IBloodStockRepository, BloodStockRepository>();
+            services.AddScoped<ICityRepository, CityRepository>();
 
             return services;
         }

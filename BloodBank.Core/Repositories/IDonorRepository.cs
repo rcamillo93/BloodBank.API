@@ -1,4 +1,5 @@
-﻿using BloodBank.Core.Entity;
+﻿using BloodBank.Core.DTO;
+using BloodBank.Core.Entity;
 
 namespace BloodBank.Core.Repositories
 {
@@ -6,6 +7,7 @@ namespace BloodBank.Core.Repositories
     {
         Task<List<Donor>> GetAllAsync();
         Task<Donor?> GetByIdAsync(int id);
+        Task<List<DonorDonationInfoDTO>> GetDonorLastDonationsInfoAsync(int idDonor);
         Task AddAsync(Donor donor);
         Task AddAddressAsync(Address address);
         Task SaveChangesAsync();

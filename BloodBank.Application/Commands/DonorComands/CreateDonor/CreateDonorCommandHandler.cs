@@ -17,17 +17,15 @@ namespace BloodBank.Application.Commands.DonorComands.CreateDonor
         public async Task<ResultViewModel<int>> Handle(CreateDonorCommand request, CancellationToken cancellationToken)
         {
             var donor = new Donor(request.FullName, request.Email, request.DateBirth, request.Gender, request.Weight,
-                                request.BloodType, request.RhFactor);      
-            
-            // TODO: Fazer a busca do CEP             
-            await _donorRepository.AddAsync(donor);       
+                                request.BloodType, request.RhFactor);    
+                 
+            await _donorRepository.AddAsync(donor);
+            await _donorRepository.SaveChangesAsync();
                         
             var address = new Address(request.Address.PublicPlace, request.Address.CityId, request.Address.Cep,
                                       request.Address.Neighborhood, donor.Id);
 
             await _donorRepository.AddAddressAsync(address);
-
-            await _donorRepository.SaveChangesAsync();
 
             return ResultViewModel<int>.Sucess(donor.Id);
 
