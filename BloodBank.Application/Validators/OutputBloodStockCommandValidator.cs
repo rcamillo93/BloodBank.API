@@ -16,7 +16,7 @@ namespace BloodBank.Application.Validators
                    .WithMessage("Valor inválido para prioridade");
 
             RuleFor(d => d.Quantity)
-                   .GreaterThan(420)
+                   .GreaterThanOrEqualTo(420)
                    .WithMessage("O valor mínimo para retirada é 420ml.");
         }
     }

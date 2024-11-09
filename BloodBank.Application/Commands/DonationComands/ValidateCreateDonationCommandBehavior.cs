@@ -21,21 +21,23 @@ namespace BloodBank.Application.Commands.DonationComands
         {
             var donor = await _donorRepository.GetDonorLastDonationsInfoAsync(request.DonorId);
 
-            if (donor.FirstOrDefault().Age < 18)
+            var dto = donor.FirstOrDefault();
+
+            if (dto.Age < 18)
                 return ResultViewModel<int>.Error("É necessário ter mínimo 18 anos para fazer uma doação ");
 
-            if (donor.FirstOrDefault().Weight < 50)
+            if (dto.Weight < 50)
                  return ResultViewModel<int>.Error("É necessário pesar mínimo 50kg para fazer uma doação ");              
            
-            int days = donor.FirstOrDefault().Gender == 'M' ? 60 : 90;
+            int days = dto.Gender == 'M' ? 60 : 90;
 
-            if(donor.FirstOrDefault().DonationDate != null) { 
+            if(dto.DonationDate != null) { 
 
-                var lastDonation = DateTime.Now.AddDays(days) < donor.FirstOrDefault().DonationDate;
+                var lastDonation = DateTime.Now.AddDays(days) < dto.DonationDate;
 
                 if(!lastDonation)
                    return ResultViewModel<int>.Error($"É necessário ter um intervalo de no mínimo {days} " +
-                         $"entre as doações. \nData da última doação: {donor.FirstOrDefault().DonationDate?.ToShortDateString()}.");
+                         $"entre as doações. \nData da última doação: {dto.DonationDate?.ToShortDateString()}.");
 
             }
 
