@@ -1,5 +1,6 @@
 ﻿using BloodBank.Core.Entity;
 using BloodBank.Core.Enums;
+using BloodBank.Core.Models;
 
 namespace BloodBank.Core.Repositories
 {
@@ -10,5 +11,6 @@ namespace BloodBank.Core.Repositories
         Task<List<BloodStock>> GetAllByType(BloodTypeEnum bloodType);
         Task<BloodStock?> GetStockBloodBy(BloodTypeEnum bloodType, RHFactorEnum rHFactor);
         Task SaveChangesAsync();
+        Task<List<StockReportModel>> GetStockReportAsync();
     }
 }

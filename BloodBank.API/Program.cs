@@ -17,6 +17,7 @@ builder.Services
     .AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<CreateDonorCommand>();
 
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 var app = builder.Build();
 

@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BloodBank.Infrastructure\BloodBank.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="HostedService\" />
+  </ItemGroup>
+
 </Project>

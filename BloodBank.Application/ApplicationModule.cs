@@ -7,6 +7,7 @@ using BloodBank.Core.Services;
 using BloodBank.Infrastructure.ExternalApi;
 using BloodBank.Infrastructure.Persistence;
 using BloodBank.Infrastructure.Persistence.Repositories;
+using BloodBank.Infrastructure.Service;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -57,6 +58,7 @@ namespace BloodBank.Application
         private static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHttpClient<ICepService, CepService>();
+            services.AddScoped<IReportService, ReportService>();
 
             return services;
         }
