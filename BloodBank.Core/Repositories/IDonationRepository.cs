@@ -7,9 +7,7 @@ namespace BloodBank.Core.Repositories
     {
         Task<List<Donation>> GetAllByPeriod(DateTime initialDate, DateTime finishDate);
         Task<List<Donation>> GetAllDonationByDonor(int idDonor);
-        Task<Donation?> GetById(int id);
-
-        Task<List<DonationsReportModel>> GettDonationsReport(DateTime initialDate, DateTime finishDate);
+        Task<Donation?> GetById(int id);    
         Task AddAsync(Donation donation);        
         Task SaveChangesAsync();
     }

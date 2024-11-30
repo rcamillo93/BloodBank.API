@@ -53,22 +53,6 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
            
         }
 
-        public async Task<List<DonationsReportModel>> GettDonationsReport(DateTime initialDate, DateTime finishDate)
-        {
-            using (var sqlConnection = new SqlConnection(_connectionString))
-            {
-                var sql = "SELECT bs.BloodType, bs.RhFactor, count(da.id) as qtddoacoes, " +
-                            " bs.QuantityMl FROM Donors D " +
-                            " INNER JOIN Donations da ON d.id = da.DonorId " +
-                            " LEFT JOIN BloodStock bs ON d.BloodType=bs.BloodType " +
-                            " GROUP BY bs.BloodType, bs.RhFactor, bs.QuantityMl ";
-
-                var stock = await sqlConnection.QueryAsync<DonationsReportModel>(sql);
-
-                return stock.ToList();
-            }
-
-        }
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();
