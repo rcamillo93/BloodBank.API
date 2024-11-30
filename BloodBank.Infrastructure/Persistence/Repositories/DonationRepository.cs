@@ -1,5 +1,7 @@
 ﻿using BloodBank.Core.Entity;
+using BloodBank.Core.Models;
 using BloodBank.Core.Repositories;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +28,8 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.Donations
                         .Include(d => d.Donor)
-                        .Where(d => d.DonationDate >= initialDate && d.DonationDate <= finishDate)
+                        .Where(d => d.DonationDate.Day >= initialDate.Day && d.DonationDate.Day <= finishDate.Day)
+                        .OrderBy(d => d.Donor.BloodType)
                         .AsNoTracking()
                         .ToListAsync();
         }
@@ -50,6 +53,22 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
            
         }
 
+        public async Task<List<DonationsReportModel>> GettDonationsReport(DateTime initialDate, DateTime finishDate)
+        {
+            using (var sqlConnection = new SqlConnection(_connectionString))
+            {
+                var sql = "SELECT bs.BloodType, bs.RhFactor, count(da.id) as qtddoacoes, " +
+                            " bs.QuantityMl FROM Donors D " +
+                            " INNER JOIN Donations da ON d.id = da.DonorId " +
+                            " LEFT JOIN BloodStock bs ON d.BloodType=bs.BloodType " +
+                            " GROUP BY bs.BloodType, bs.RhFactor, bs.QuantityMl ";
+
+                var stock = await sqlConnection.QueryAsync<DonationsReportModel>(sql);
+
+                return stock.ToList();
+            }
+
+        }
         public async Task SaveChangesAsync()
         {
             await _dbContext.SaveChangesAsync();

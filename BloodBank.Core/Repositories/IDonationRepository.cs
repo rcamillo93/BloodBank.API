@@ -1,4 +1,5 @@
 ﻿using BloodBank.Core.Entity;
+using BloodBank.Core.Models;
 
 namespace BloodBank.Core.Repositories
 {
@@ -7,7 +8,8 @@ namespace BloodBank.Core.Repositories
         Task<List<Donation>> GetAllByPeriod(DateTime initialDate, DateTime finishDate);
         Task<List<Donation>> GetAllDonationByDonor(int idDonor);
         Task<Donation?> GetById(int id);
-      //  Task<DateTime> GetDateLastDonation(int idDonor);
+
+        Task<List<DonationsReportModel>> GettDonationsReport(DateTime initialDate, DateTime finishDate);
         Task AddAsync(Donation donation);        
         Task SaveChangesAsync();
     }

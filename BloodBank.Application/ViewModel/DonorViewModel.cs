@@ -14,8 +14,8 @@ namespace BloodBank.Application.ViewModel
             DateBirth = dateBirth;
             Gender = gender;
             Weight = weight;
-            BloodType = bloodType;
-            RhFactor = rhFactor;
+            BloodType = bloodType.ToString();
+            RhFactor = rhFactor.ToString();
            // Address = address;          
         }
 
@@ -25,8 +25,8 @@ namespace BloodBank.Application.ViewModel
         public DateTime DateBirth { get; private set; }
         public char Gender { get; private set; }
         public double Weight { get; private set; }
-        public BloodTypeEnum BloodType { get; private set; }
-        public RHFactorEnum RhFactor { get; private set; }
+        public string BloodType { get; private set; }
+        public string RhFactor { get; private set; }
         //public Address Address { get; private set; }
         public List<Donation> Donations { get; private set; } = new List<Donation>();
     }

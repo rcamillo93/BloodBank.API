@@ -1,4 +1,5 @@
-﻿using BloodBank.Application.Queries.ReportQueries.GetStockReport;
+﻿using BloodBank.Application.Queries.ReportQueries.DonationsReport;
+using BloodBank.Application.Queries.ReportQueries.GetStockReport;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,17 @@ namespace BloodBank.API.Controllers
 
             var result = await _mediator.Send(query);
 
-            return File(result, "application/pdf", "StockReport.pdf");
+            return File(result, "application/pdf", $"StockReport-{DateTime.Now.ToShortDateString()}.pdf");
+        }
+
+        [HttpGet("period")]
+        public async Task<IActionResult> GetDonationsReport([FromQuery] DateTime startDate, DateTime endDate)
+        {
+            var query = new GetAllDonationsByPeriodReportQuery(startDate, endDate);
+
+            var result = await _mediator.Send(query);
+
+            return File(result, "application/pdf", $"DonationsReport-{DateTime.Now.ToShortDateString()}.pdf");
         }
     }
 }

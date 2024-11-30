@@ -1,20 +1,29 @@
-﻿using BloodBank.Core.Repositories;
+﻿using BloodBank.Core.Models;
+using BloodBank.Core.Repositories;
+using BloodBank.Core.Services;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BloodBank.Application.Queries.ReportQueries.DonationsReport
 {
     public class GetAllDonationsByPeriodReportQueryHandler : IRequestHandler<GetAllDonationsByPeriodReportQuery, byte[]>
     {
         private readonly IDonationRepository _donationRepository;
+        private readonly IReportService _reportService;
 
-        public Task<byte[]> Handle(GetAllDonationsByPeriodReportQuery request, CancellationToken cancellationToken)
+        public GetAllDonationsByPeriodReportQueryHandler(IDonationRepository donationRepository, IReportService reportService)
         {
-            throw new NotImplementedException();
+            _donationRepository = donationRepository;
+            _reportService = reportService;
+        }
+
+        public async Task<byte[]> Handle(GetAllDonationsByPeriodReportQuery request, CancellationToken cancellationToken)
+        {
+            var reportData = await _donationRepository.GetAllByPeriod(request.StartDate, request.EndDate);
+
+            var pdfBytes = _reportService.GenerateDonationsReport(reportData);
+
+            return pdfBytes;
         }
     }
 }

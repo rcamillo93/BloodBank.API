@@ -24,10 +24,10 @@ namespace BloodBank.Infrastructure.Reports
                 page.Size(PageSizes.A4);
                 page.Margin(2, Unit.Centimetre);
                 page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(14)); // Diminuído para evitar conflitos de tamanho
+                page.DefaultTextStyle(x => x.FontSize(14)); 
 
                 page.Header()
-                    .Text("Estoque de sangue")
+                    .Text("Blood Stock")
                     .SemiBold().FontSize(24).FontColor(Colors.Black)
                     .AlignCenter();
 
@@ -35,22 +35,22 @@ namespace BloodBank.Infrastructure.Reports
                     .PaddingVertical(1, Unit.Centimetre)
                     .Column(x =>
                     {
-                        x.Spacing(10); // Diminuído para economizar espaço
+                        x.Spacing(10);
 
                         x.Item().Table(t =>
                         {
                             t.ColumnsDefinition(c =>
                             {
-                                c.RelativeColumn(2); // Ajuste proporcional para evitar conflito de largura
+                                c.RelativeColumn(2); 
                                 c.RelativeColumn(2);
                                 c.RelativeColumn(3);
                                 c.RelativeColumn(3);
                             });
 
-                            t.Cell().Row(1).Column(1).Element(Block).Text("Tipo Sanguíneo").SemiBold();
-                            t.Cell().Row(1).Column(2).Element(Block).AlignLeft().PaddingLeft(6).Text("Fator RH").SemiBold();
-                            t.Cell().Row(1).Column(3).Element(Block).Text("Quantidade (ML)").SemiBold();
-                            t.Cell().Row(1).Column(4).Element(Block).Text("Quantidade de doações").SemiBold();
+                            t.Cell().Row(1).Column(1).Element(Block).Text("Blood Type").SemiBold();
+                            t.Cell().Row(1).Column(2).Element(Block).AlignLeft().PaddingLeft(6).Text("RH Factor").SemiBold();
+                            t.Cell().Row(1).Column(3).Element(Block).Text("Quantity (ML)").SemiBold();
+                            t.Cell().Row(1).Column(4).Element(Block).Text("Total donations").SemiBold();
 
                             uint rowIndex = 2;
 
