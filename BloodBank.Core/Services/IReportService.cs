@@ -6,6 +6,6 @@ namespace BloodBank.Core.Services
     public interface IReportService
     {
        byte[] GenerateStockReport(List<StockReportModel> data);
-       byte[] GenerateDonationsReport(List<Donation> data);
+       byte[] GenerateDonationsReport(List<Donation> data, DateTime startDate, DateTime endDate);
     }
 }

@@ -8,9 +8,9 @@ namespace BloodBank.Infrastructure.Service
 {
     public class ReportService : IReportService
     {
-        public byte[] GenerateDonationsReport(List<Donation> data)
+        public byte[] GenerateDonationsReport(List<Donation> data, DateTime startDate, DateTime endDate)
         {
-            var document = new DonationsReportDocument(data);
+            var document = new DonationsReportDocument(data, startDate, endDate);
             return document.GeneratePdf();
         }
 

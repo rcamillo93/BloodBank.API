@@ -45,12 +45,14 @@ namespace BloodBank.Infrastructure.Reports
                                 c.RelativeColumn(2);
                                 c.RelativeColumn(3);
                                 c.RelativeColumn(3);
+                                c.RelativeColumn(2);
                             });
 
                             t.Cell().Row(1).Column(1).Element(Block).Text("Blood Type").SemiBold();
                             t.Cell().Row(1).Column(2).Element(Block).AlignLeft().PaddingLeft(6).Text("RH Factor").SemiBold();
                             t.Cell().Row(1).Column(3).Element(Block).Text("Quantity (ML)").SemiBold();
-                            t.Cell().Row(1).Column(4).Element(Block).Text("Total donations").SemiBold();
+                            t.Cell().Row(1).Column(4).Element(Block).Text("Last Donation").SemiBold();
+                            t.Cell().Row(1).Column(5).Element(Block).Text("Total donations").SemiBold();
 
                             uint rowIndex = 2;
 
@@ -59,7 +61,8 @@ namespace BloodBank.Infrastructure.Reports
                                 t.Cell().Row(rowIndex).Column(1).Element(Entry).Text(item.BloodType.ToString());
                                 t.Cell().Row(rowIndex).Column(2).Element(Entry).Text(item.RHFactor.ToString());
                                 t.Cell().Row(rowIndex).Column(3).Element(Entry).Text(item.QuantityMl.ToString());
-                                t.Cell().Row(rowIndex).Column(4).Element(Entry).Text(item.QtdDoacoes.ToString());
+                                t.Cell().Row(rowIndex).Column(4).Element(Entry).Text(item.LastDonation.ToShortDateString());
+                                t.Cell().Row(rowIndex).Column(5).Element(Entry).Text(item.QtdDoacoes.ToString());
 
                                 rowIndex++;
                             }

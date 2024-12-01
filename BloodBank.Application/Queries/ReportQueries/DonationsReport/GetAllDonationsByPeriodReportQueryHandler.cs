@@ -21,7 +21,7 @@ namespace BloodBank.Application.Queries.ReportQueries.DonationsReport
         {
             var reportData = await _donationRepository.GetAllByPeriod(request.StartDate, request.EndDate);
 
-            var pdfBytes = _reportService.GenerateDonationsReport(reportData);
+            var pdfBytes = _reportService.GenerateDonationsReport(reportData, request.StartDate, request.EndDate);
 
             return pdfBytes;
         }

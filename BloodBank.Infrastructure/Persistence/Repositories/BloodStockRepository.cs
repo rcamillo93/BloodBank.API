@@ -49,7 +49,7 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
             using (var sqlConnection = new SqlConnection(_connectionString))
             {
                 var sql = "SELECT bs.BloodType, bs.RhFactor, count(da.id) as qtddoacoes, " +
-                            " bs.QuantityMl FROM Donors D " +                     
+                            " bs.QuantityMl, max(donationDate) as lastDonation FROM Donors D " +                     
                             " INNER JOIN Donations da ON d.id = da.DonorId " +
                             " LEFT JOIN BloodStock bs ON d.BloodType=bs.BloodType " +
                             " GROUP BY bs.BloodType, bs.RhFactor, bs.QuantityMl ";

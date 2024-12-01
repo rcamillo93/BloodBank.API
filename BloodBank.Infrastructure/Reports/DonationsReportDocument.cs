@@ -10,17 +10,20 @@ namespace BloodBank.Infrastructure.Reports
     public class DonationsReportDocument : IDocument
     {
         private readonly List<Donation> _data;
+        private readonly DateTime _startDate;
+        private readonly DateTime _endDate;
 
-        public DonationsReportDocument(List<Donation> data)
+        public DonationsReportDocument(List<Donation> data, DateTime startDate, DateTime endDate)
         {
             _data = data;
+            _startDate = startDate;
+            _endDate = endDate;
         }
 
         public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
 
         public void Compose(IDocumentContainer container)
-        {
-            // Agrupamento das doações por tipo sanguíneo e fator RH
+        {            
             var groupedDonations = _data
                 .GroupBy(d => new { d.Donor.BloodType, d.Donor.RhFactor })
                 .OrderBy(g => g.Key.BloodType)
@@ -28,15 +31,29 @@ namespace BloodBank.Infrastructure.Reports
 
             container.Page(page =>
             {
-                page.Size(PageSizes.A4);                
-                page.Margin(1, Unit.Centimetre);
-                page.PageColor(Colors.White);
-                page.DefaultTextStyle(x => x.FontSize(12));
+            page.Size(PageSizes.A4);
+            page.Margin(1, Unit.Centimetre);
+            page.PageColor(Colors.White);
+            page.DefaultTextStyle(x => x.FontSize(12));
 
-                page.Header()
-                    .Text($"Donations by Blood Type in the period")
-                    .SemiBold().FontSize(18).FontColor(Colors.Black)
-                .AlignCenter();
+            page.Header()
+                .AlignCenter()
+                .Column(column =>
+                {
+                    // Título
+                    column.Item().Text(t =>
+                    {
+                        t.Span("Donations by Blood Type in the period")
+                            .SemiBold().FontSize(18);
+                    });
+
+                    // Datas em uma nova linha
+                    column.Item().AlignRight().Text(t =>
+                    {
+                        t.Span($"{_startDate.ToShortDateString()} - {_endDate.ToShortDateString()}")
+                            .SemiBold().FontSize(10).LineHeight(1);
+                    });
+                });
 
                 page.Content()
                   .PaddingVertical(2, Unit.Centimetre)
@@ -99,7 +116,7 @@ namespace BloodBank.Infrastructure.Reports
                           });
 
                           //column.Item().Height(10); 
-                          column.Item().PaddingVertical(20); // Linha em branco entre grupos
+                          column.Item().PaddingVertical(20);
                       }
 
                   });
@@ -108,7 +125,7 @@ namespace BloodBank.Infrastructure.Reports
                     .AlignRight()
                     .Text(x =>
                     {
-                        x.Span($"Gerado em {DateTime.Now:dd/MM/yyyy} - Página ");
+                        x.Span($"Generated: {DateTime.Now:dd/MM/yyyy} - Page ");
                         x.CurrentPageNumber();
                     });
             });

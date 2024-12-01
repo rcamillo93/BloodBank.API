@@ -28,7 +28,7 @@ namespace BloodBank.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.Donations
                         .Include(d => d.Donor)
-                        .Where(d => d.DonationDate.Day >= initialDate.Day && d.DonationDate.Day <= finishDate.Day)
+                        .Where(d => d.DonationDate.Date >= initialDate.Date && d.DonationDate.Date <= finishDate.Date)
                         .OrderBy(d => d.Donor.BloodType)
                         .AsNoTracking()
                         .ToListAsync();
