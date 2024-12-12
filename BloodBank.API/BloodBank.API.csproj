@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>false</InvariantGlobalization>
+    <UserSecretsId>9af66bf8-109f-4f65-a845-1c705194e17e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,10 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\BloodBank.Application\BloodBank.Application.csproj" />
     <ProjectReference Include="..\BloodBank.Infrastructure\BloodBank.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="HostedService\" />
   </ItemGroup>
 
 </Project>

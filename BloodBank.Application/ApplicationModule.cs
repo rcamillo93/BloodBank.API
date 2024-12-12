@@ -5,6 +5,7 @@ using BloodBank.Application.Models;
 using BloodBank.Core.Repositories;
 using BloodBank.Core.Services;
 using BloodBank.Infrastructure.ExternalApi;
+using BloodBank.Infrastructure.Notifications;
 using BloodBank.Infrastructure.Persistence;
 using BloodBank.Infrastructure.Persistence.Repositories;
 using BloodBank.Infrastructure.Service;
@@ -59,6 +60,7 @@ namespace BloodBank.Application
         {
             services.AddHttpClient<ICepService, CepService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddTransient<IEmailService, EmailService>();
 
             return services;
         }

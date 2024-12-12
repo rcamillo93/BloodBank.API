@@ -1,3 +1,4 @@
+using BloodBank.API.HostedService;
 using BloodBank.Application;
 using BloodBank.Application.Commands.DonorComands.CreateDonor;
 using FluentValidation;
@@ -18,6 +19,8 @@ builder.Services
     .AddValidatorsFromAssemblyContaining<CreateDonorCommand>();
 
 QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
+builder.Services.AddHostedService<BloodStockControl>();
 
 var app = builder.Build();
 
