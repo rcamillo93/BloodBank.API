@@ -1,6 +1,0 @@
-@BookRatingManager.API_HostAddress = http://localhost:5273
-
-GET {{BookRatingManager.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
